@@ -1,0 +1,41 @@
+# Function to perform Quick Sort
+def quicksort(arr, start, end):
+    if end <= start + 1:
+        return
+
+    pivot = arr[start + (end - start) // 2]
+    arr[start], arr[start + (end - start) // 2] = arr[start + (end - start) // 2], arr[start]
+
+    index = start
+
+    for i in range(start + 1, start + end):
+        if arr[i] < pivot:
+            index += 1
+            arr[i], arr[index] = arr[index], arr[i]
+
+    arr[start], arr[index] = arr[index], arr[start]
+
+    quicksort(arr, start, index - start)
+    quicksort(arr, index + 1, start + end - index - 1)
+
+# Function to merge two arrays
+def merge(arr1, arr2):
+    result = []
+    i = 0
+    j = 0
+
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] < arr2[j]:
+            result.append(arr1[i])
+            i += 1
+        else:
+            result.append(arr2[j])
+            j += 1
+
+    return result + arr1[i:] + arr2[j:]
+
+# Driver Code
+data = [10, 7, 8, 9, 1, 5] 
+n = len(data)
+quicksort(data, 0, n)
+print("Sorted array:", data)
